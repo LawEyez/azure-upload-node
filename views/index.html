@@ -1,0 +1,40 @@
+<%- include('partials/header.html') -%>
+
+<h1 class="blue-txt txt-xlg fw-300 mb-2">Welcome to CloudStore</h1>
+<h2 class="light-grey-txt txt-md fw-300 mb-5">The one-stop solution for all your cloud storage needs. Try out the demo below:</h2>
+
+<h2 class="blue-txt txt-md mb-2">Upload Photo</h2>
+<hr class="mb-3">
+
+<div class="grid grid-col-2">
+    <div class="g-col">
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            
+            <div class="input-group flex align-center mb-4">
+                <label class="btn mr-2">
+                    <input type="file" name="image" id="fileUpload">
+                    <span>Choose File</span>
+                </label>
+                <span class="txt-sm blue-txt" id="fileName">No file chosen</span>
+            </div>
+
+            <button class="btn btn-outline" type="submit">
+                <i class="lnr lnr-cloud-upload mr-h"></i>
+                <span>Upload</span>
+            </button>
+            
+        </form>
+    </div>
+
+    <div class="g-col bg-light-grey grid">
+        <% if (previews) { %>
+            <% previews.forEach(prev => { %>
+                <img src="https://<%= account %>.blob.core.windows.net/<%= container %>/<%= prev.name %>" alt="img">
+            <% }) %>
+        <% } else { %>
+            <h1 class="fw-300 txt-lg blue-txt grid-center">No preview to show</h1>
+        <% } %>
+    </div>
+</div>
+
+<%- include('partials/footer.html') -%>
